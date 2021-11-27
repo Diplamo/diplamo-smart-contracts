@@ -16,7 +16,7 @@ def deploy_lillup_nft():
         {"from": account},
         publish_source=config["networks"][network.show_active()].get("verify", False),
     )
-    print(f"lillup NFT contract deployed to {api_consumer.address}")
+    print(f"Ampersand NFT contract deployed to {api_consumer.address}")
     return api_consumer
 
 
