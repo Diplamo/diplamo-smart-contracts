@@ -19,9 +19,7 @@ contract ampersand721 is
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    // Addittional mapping for Knowledge Graph token URIs
-    mapping(uint256 => string) private _graphURIs;
-
+    mapping(uint256 => string) private _ampersandURI;
     // Create a new role identifiers
     bytes32 public constant CREATORS_MANAGER_ROLE =
         keccak256("CREATORS_MANAGER_ROLE");
@@ -41,43 +39,18 @@ contract ampersand721 is
     //
     // _tokenURIs
     // metadata related to the digital content (course)
-    // = name of the creator, title of the course or its product reference,IP of the creator, date when the creator proceed on lillup
-    //
-    // _graphURIs
-    // metadata (knowledge graph)
-    // = result of the computing process to extract knowledge and modeling the knowledge extracted within a graph structured
-
-    function graphURI(uint256 tokenId) public view returns (string memory) {
-        require(
-            _exists(tokenId),
-            "ERC721URIStorage: URI query for nonexistent token"
-        );
-        return _graphURIs[tokenId];
-    }
-
-    function _setGraphURI(uint256 tokenId, string memory _graphURI)
-        internal
-        virtual
-    {
-        require(
-            _exists(tokenId),
-            "ERC721URIStorage: URI set of nonexistent token"
-        );
-        _graphURIs[tokenId] = _graphURI;
-    }
+    // = name of the creator, title of the course or its product reference,IP of the creator, date when the creator created it on diplamo
 
     // Only creator could mint ampersand tokens
-    function createAmpersand(
-        address reciever,
-        string memory _ampersandURI,
-        string memory _graphURI
-    ) public onlyRole(CREATOR_ROLE) returns (uint256) {
+    function createAmpersand(address reciever, string memory _ampersandURI)
+        public
+        onlyRole(CREATOR_ROLE)
+        returns (uint256)
+    {
         uint256 newTokenId = _tokenIds.current();
         _tokenIds.increment();
         _safeMint(reciever, newTokenId);
         _setTokenURI(newTokenId, _ampersandURI);
-        _setGraphURI(newTokenId, _graphURI);
-
         return newTokenId;
     }
 
@@ -113,8 +86,8 @@ contract ampersand721 is
         override(ERC721, ERC721URIStorage)
     {
         super._burn(tokenId);
-        if (bytes(_graphURIs[tokenId]).length != 0) {
-            delete _graphURIs[tokenId];
+        if (bytes(_ampersandURI[tokenId]).length != 0) {
+            delete _ampersandURI[tokenId];
         }
     }
 
