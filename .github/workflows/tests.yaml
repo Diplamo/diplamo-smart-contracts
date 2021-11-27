@@ -1,0 +1,48 @@
+name: contract-tests
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache brownie
+        id: cache-brownie
+        uses: actions/cache@v2
+        with:
+          # dirs where pipx install dependencies by default
+          path: |
+            /opt/pipx/venvs/eth-brownie
+            /opt/pipx_bin/brownie
+          key: ${{ runner.os }}-brownie-cache
+
+      - name: Install brownie
+        if: steps.cache-brownie.outputs.cache-hit != 'true'
+        run: pipx install eth-brownie
+
+      - name: Cache ganache-cli
+        id: cache-ganache
+        uses: actions/cache@v2
+        with:
+          path: |
+            /usr/local/lib/node_modules/ganache-cli
+            /usr/local/bin/ganache-cli
+          key: ${{ runner.os }}-ganache-cache
+
+      - name: Install ganache-cli
+        if: steps.cache-ganache.outputs.cache-hit != 'true'
+        run: npm install -g ganache-cli
+
+      - uses: actions/checkout@v2
+
+      - name: Cache solc
+        uses: actions/cache@v2
+        with:
+          path: ~/.solcx
+          key: ${{ runner.os }}-solcx-cache
+
+      - name: Run tests
+        run: if [[ $(find . -type d -name "contracts" | wc -l) > 0 ]]; then brownie test; else exit 0; fi
