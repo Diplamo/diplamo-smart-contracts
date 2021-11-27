@@ -32,7 +32,7 @@ contract ampersand721 is
         // All accounts with "CREATORS_MANAGER_ROLE" will be able to manage "CREATOR_ROLE"
         // "DEFAULT_ADMIN_ROLE" is no more RoleAdmin for "CREATOR_ROLE"
         _setRoleAdmin(CREATOR_ROLE, CREATORS_MANAGER_ROLE);
-        // TODO erase ContractOwner from "CREATOR_ROLE" and "CREATORS_MANAGER_ROLE"
+        // To erase ContractOwner from "CREATOR_ROLE" and "CREATORS_MANAGER_ROLE"
     }
 
     // ampersandURI will contain:
@@ -41,7 +41,7 @@ contract ampersand721 is
     // metadata related to the digital content (course)
     // = name of the creator, title of the course or its product reference,IP of the creator, date when the creator created it on diplamo
 
-    // Only creator could mint ampersand tokens
+    // Only creator can mint ampersand tokens
     function createAmpersand(address reciever, string memory _ampersandURI)
         public
         onlyRole(CREATOR_ROLE)
@@ -54,7 +54,7 @@ contract ampersand721 is
         return newTokenId;
     }
 
-    // Only creator could transfer ampersand tokens
+    // Only creator can transfer ampersand tokens
     function transferFrom(
         address from,
         address to,
