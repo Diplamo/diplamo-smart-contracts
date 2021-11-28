@@ -36,7 +36,6 @@ contract ampersand721 is
     }
 
     // ampersandURI will contain:
-    //
     // _tokenURIs
     // metadata related to the digital content (course)
     // = name of the creator, title of the course or its product reference,IP of the creator, date when the creator created it on diplamo
