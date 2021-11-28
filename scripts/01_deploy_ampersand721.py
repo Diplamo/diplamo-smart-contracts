@@ -6,7 +6,7 @@ from scripts.helpful_scripts import (
 )
 
 
-def deploy_lillup_nft():
+def deploy_ampersand_nft():
     jobId = config["networks"][network.show_active()]["jobId"]
     fee = config["networks"][network.show_active()]["fee"]
     account = get_account()
@@ -21,4 +21,4 @@ def deploy_lillup_nft():
 
 
 def main():
-    deploy_lillup_nft()
+    deploy_ampersand_nft()
