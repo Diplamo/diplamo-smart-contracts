@@ -63,5 +63,9 @@ You can also [learn how to set environment variables easier](https://www.twilio.
 Or you can run the above in your shell. 
 
 ## Deploying
-In your terminal run brownie run .\scripts\01_deploy_ampersand721.py --network "name of the network where you want to deploy"
+In your terminal type and run
+
+```
+brownie run .\scripts\01_deploy_ampersand721.py --network "name of the network where you want to deploy"
+```
 
