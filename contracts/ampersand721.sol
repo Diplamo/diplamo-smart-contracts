@@ -19,7 +19,7 @@ contract ampersand721 is
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    mapping(uint256 => string) private _ampersandURI;
+    mapping(uint256 => string) private ampersandURI;
     // Create a new role identifiers
     bytes32 public constant CREATORS_MANAGER_ROLE =
         keccak256("CREATORS_MANAGER_ROLE");
@@ -85,8 +85,8 @@ contract ampersand721 is
         override(ERC721, ERC721URIStorage)
     {
         super._burn(tokenId);
-        if (bytes(_ampersandURI[tokenId]).length != 0) {
-            delete _ampersandURI[tokenId];
+        if (bytes(ampersandURI[tokenId]).length != 0) {
+            delete ampersandURI[tokenId];
         }
     }
 
