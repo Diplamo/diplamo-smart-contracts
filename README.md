@@ -1,6 +1,6 @@
-# ampersand-token
+# ampersand721
 
-Smart contract of Ampersand NFT
+Smart contract of Diplamo
 
 ## Prerequisites
 
